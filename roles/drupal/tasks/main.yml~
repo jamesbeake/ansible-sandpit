@@ -1,0 +1,41 @@
+---
+# file: drupal/tasks/main.yml
+
+- name: Download DRUPAL using Drush.
+  command: drush dl drupal --destination=/var/www --drupal-project-rename={{ sitename }} -y creates=/var/www/{{ sitename }}
+  tags: drupal
+
+- name: Fix permissions on Drupal site directory
+  file: path=/var/www/{{ sitename }} owner=james group=www-data state=directory recurse=yes
+
+- name: Set correct permissions on FILES folder
+  file: path=/var/www/{{ sitename }}/sites/default/files 
+           owner=james group=www-data mode=0775 state=directory
+  tags: drupal
+
+- name: Copy default Settings.php file if Settings.PHP file does not exist
+  command: cp default.settings.php settings.php 
+           chdir=/var/www/{{ sitename }}/sites/default
+           creates=/var/www/{{ sitename }}/sites/default/settings.php
+  register: settingsfile
+
+- name: Allow read/write to settings.php
+  file: path=/var/www/{{ sitename }}/sites/default/settings.php owner=james group=www-data mode=660
+  tags: drupal
+
+## drush si --db-url=mysql://testing:testing@localhost/testing
+## https://drupal.org/node/1606348
+
+- name: Run DRUSH Site-Install command
+  command: drush si --db-url=mysql://{{sitename}}:{{sitename}}@localhost/{{sitename}} --clean-url=0 --yes -r=/var/www/{{sitename}} 
+  register: si-result
+  tags: drupal
+
+#- name: Show Admin random password assigned by site-install command
+#  debug: msg=" Run $(si-result.stdout) result"su
+#  tags: drupal
+
+  
+#- name: Cleanup Site install - not needed, done by drush si
+#  file: path=/var/www/{{ sitename }}/sites/default/settings.php mode=440
+#  tags: drupal

@@ -1,0 +1,6 @@
+---
+# file: sublimetext/vars/main.yml
+
+sublime_text_path: "/home/james/Dropbox/Sublime Text 2-64"
+sublime_text_icon: "Icon/256x256/sublime_text.png"
+

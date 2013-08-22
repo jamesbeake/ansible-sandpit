@@ -1,0 +1,5 @@
+export ANSIBLE_HOSTS="~/Dropbox/workspace/ansible/Master/ansible_hosts"
+source ~/opt/ansible/hacking/env-setup
+ssh-agent
+echo end of .bash_aliases
+

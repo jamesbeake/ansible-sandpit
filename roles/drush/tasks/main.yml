@@ -1,0 +1,32 @@
+---
+# file: drush/tasks/main.yml
+
+#- name: remove Drush if it exists
+  #file: path=/home/james/opt/drush state=absent
+  #tags: removedrush 
+   
+- name: Download drush from git
+  git: repo=git://git.drupal.org/project/drush.git
+       dest=/home/james/opt/drush
+       version=HEAD
+  #sudo_user: james
+  tags: drush
+
+- name: fix permissions on opt/drush
+  file: path=/home/james/opt/drush owner=james group=james
+           recurse=yes state=directory
+  tags: drush
+
+#- name: fix permissions on opt/drush
+#  file: path=/home/james/testopt owner=james group=james
+#           recurse=yes state=directory
+#  tags: test
+
+- name: set drush as executable
+  file: path=/home/james/opt/drush/drush mode=0755
+  tags: drush
+
+- name: create drush soft link
+  file: src=/home/james/opt/drush/drush dest=/usr/bin/drush state=link
+  ignore_errors: no
+  tags: drush

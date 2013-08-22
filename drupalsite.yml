@@ -1,0 +1,18 @@
+---
+# file: drushtest.yml
+- hosts: local
+  user: james
+  sudo: yes
+
+  vars_prompt:
+    - name: "sitename"
+      prompt: "Enter Site name"
+      private: no
+      default: "mydrupal"
+
+  roles:
+    - role: webtier
+    - role: database
+    - role: drush
+    - role: drupal
+

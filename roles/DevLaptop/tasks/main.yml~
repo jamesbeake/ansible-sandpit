@@ -1,0 +1,24 @@
+---
+# file: devlaptop/tasks/main.yml
+
+- name: update repository cache every one day
+  apt: update_cache=yes cache_valid_time=86400
+  tags: ubuntu
+
+- name: Install Aptitude for Ansible based upgrades
+  apt: pkg=aptitude state=installed
+  tags: ubuntu
+ 
+- name: perform upgrade
+  apt: upgrade=safe
+  #when: ansible_hostname == "milhouse"
+  sudo: yes
+  tags: ubuntu
+
+# sudo apt-get install  (Dell mini)
+- name: Broadcom wireless firmware for Dell Mini
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - firmware-b43-lpphy-installer
+  when: ansible_hostname == "milhouse"
+

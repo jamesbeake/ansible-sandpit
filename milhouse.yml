@@ -1,0 +1,9 @@
+---
+# file: milhouse.yml
+- hosts: local
+  roles:
+    - role: webtier
+    - role: database
+    - role: drush
+    - role: drupal
+

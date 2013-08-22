@@ -1,0 +1,10 @@
+---
+# file: Laptops.yml
+- hosts: local
+#  user: james
+  roles:
+    - role: DevLaptop
+    - role: awsManager
+#    - role: minecraft #when: {{ ansible_hostname }}="carl"
+#    - role: sublimetext #when: {{ ansible_userspace_bits }}="64"
+

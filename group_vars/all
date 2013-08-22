@@ -1,0 +1,16 @@
+---
+# file: group_vars/all
+ntp: ntp-boston.example.com
+backup: backup-boston.example.com
+
+#------
+# Mysql variables
+mysqlservice: mysql
+mysql_port: 3306
+mysql_admin: 
+mysql_admin_password:
+#drupalsitename: {{ sitename }} 
+#dbuser: {{ sitename }}
+#dbname: {{ sitename }}
+
+upassword: "{{ sitename }}"

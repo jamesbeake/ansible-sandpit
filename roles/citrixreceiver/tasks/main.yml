@@ -1,0 +1,20 @@
+---
+# file: citrixreceiver/tasks/main.yml
+
+- name: 
+  apt: pkg={{ item }} state=present
+  with_items:
+  - libmotif4
+  - nspluginwrapper
+  tags: ICA
+
+- name: Copy Citrix Reciever deb to /tmp
+  copy: src=icaclient-12.1.0_amd64.deb dest=/tmp
+
+- name: Install Citrix Reciever
+  command: gdebi -/tmp/icaclient-12.1.0_amd64.deb
+  tags: ICA
+
+- name: Use Mozilla Certificates
+  file: src=/usr/share/ca-certificates/mozilla/* dest=/opt/Citrix/ICAClient/keystore/cacerts/ state=link
+  tags: ICA

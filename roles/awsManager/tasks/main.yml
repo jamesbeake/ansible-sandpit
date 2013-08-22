@@ -1,0 +1,9 @@
+---
+# file: awsManager/tasks/main.yml
+
+- name: Install Ansible AWS support
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - python-boto
+
+

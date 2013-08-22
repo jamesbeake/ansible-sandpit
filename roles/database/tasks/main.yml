@@ -1,0 +1,22 @@
+---
+# This playbook will install mysql and create db user and give permissions.
+
+- name: Install Mysql package
+  action: apt pkg={{ item }} state=installed
+  with_items:
+   - mysql-server
+   - python-mysqldb
+
+#- name: Create Mysql configuration file
+#  action: template src=my.cnf.j2 dest=/etc/my.cnf
+#  notify: 
+#  - restart mysql
+
+- name: Start Mysql Service
+  service: name={{ mysqlservice }} state=started enabled=yes
+
+- name: Create Application Database
+  mysql_db: name={{ sitename }} state=present
+
+- name: Create Application DB User
+  mysql_user: name={{ sitename }} password={{ sitename }} priv={{ sitename }}.*:ALL host='localhost' state=present

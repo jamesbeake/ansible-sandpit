@@ -1,0 +1,12 @@
+---
+# file: sublimetext/tasks/main.yml
+
+#- name: Download latest sublime text
+#  file: 
+#  tags: ubuntu
+
+- name: Create Sublime Text Desktop Icon
+  template: src=sublimetext.desktop.j2 dest=/usr/share/applications/sublime.desktop mode=0775
+  tags: ubuntu
+
+

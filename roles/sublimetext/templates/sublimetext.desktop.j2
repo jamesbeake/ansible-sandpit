@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Sublime Text 2 (64)
+Exec="{{ sublime_text_path }}/sublime_text" %F
+MimeType=text/plain;
+Terminal=false
+Type=Application
+Icon={{ sublime_text_path }}/{{ sublime_text_icon }}
+Categories=GNOME;GTK;Utility;TextEditor;Development;
+Actions=New;
+
+[Desktop Action New]
+Name=New Editor Window
+Exec="{{ sublime_text_path }}/sublime_text" --new-window

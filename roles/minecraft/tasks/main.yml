@@ -1,0 +1,26 @@
+---
+# file: minecraft/tasks/main.yml
+
+#- name: Download latest
+#  file: 
+#  tags: ubuntu
+
+- name: Remove texturepacks Directory
+  file: path=/home/james/.minecraft/texturepacks state=absent
+  #debug: msg="Testmessage"
+  tags: ubuntu
+
+- name: Create links to Dropbox texturepacks version  
+  file: src=/home/james/Dropbox/mincraft/texturepacks path=/home/james/.minecraft/texturepacks state=link
+  tags: ubuntu
+
+- name: Remove Saves Directory
+  file: path=/home/james/.minecraft/saves state=absent
+  #debug: "Testmessage"
+  tags: ubuntu
+
+- name: Create links to Dropbox Saves version  
+  file: src=/home/james/Dropbox/mincraft/saves path=/home/james/.minecraft/saves state=link
+  tags: ubuntu
+
+

@@ -1,0 +1,16 @@
+---
+# file: test.yml
+- hosts: local
+  user: james
+
+  vars_prompt:
+    - name: "sitename"
+      prompt: "Enter Site name default = mydrupal"
+      private: no
+      default: "mydrupal"
+
+  tasks:
+    - debug: msg="{{ upassword }} something"
+      when:  upassword ==  "mydrupal"
+
+    - debug: msg="{{ sitename }} something else"

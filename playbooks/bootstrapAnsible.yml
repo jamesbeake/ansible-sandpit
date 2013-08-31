@@ -1,0 +1,10 @@
+---
+# file: boostrapAnsible.yml
+- hosts: ansible
+#  user: james
+  roles:
+    - role: DevLaptop
+    - role: ansible
+
+
+

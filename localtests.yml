@@ -1,8 +1,0 @@
----
-# file: local.yml
-- hosts: local
-  user: james
-
-  roles:
-    - role: sublimetext
-    - role: citrixreceiver

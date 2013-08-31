@@ -4,11 +4,16 @@
   user: james
   sudo: yes
 
+
   vars_prompt:
     - name: "sitename"
       prompt: "Enter Site name"
       private: no
       default: "mydrupal"
+
+    - name: "sitepass"
+      prompt: "Enter the admin password for the new site"
+      private: yes
 
   roles:
     - role: webtier

@@ -26,5 +26,5 @@
   file: dest=/home/james/Documents src=/home/james/Dropbox/Home\ Files/james owner=james group=james state=link
   
 - name: Backup gpg keys
-  command: "rsync -r /home/james/.gnupg /media/D7EC-A43D/JAMES-FILES/"
+
   

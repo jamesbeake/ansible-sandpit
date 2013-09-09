@@ -1,0 +1,41 @@
+~/.gitconfig
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+
+
+Git needs periodic maintenance to make it run fast. Here's a way to avoid ever having to think about it by making it run automatically.
+
+
+  [gc]
+  auto=1
+
+
+  By default, when you merge a branch in git, you get a fairly meaningless message like merge branch 'master' of git@github.com:name/project. To get a summary of the changes you're merging, turn this option on:
+
+[merge]
+  summary=true
+
+  It's also handy when doing cherry-pick to copy changes from one branch to another, to have git automatically put the original commit hash into the commit comment. Here's an alias for doing this:
+
+[alias]
+  cp = cherry-pick -x
+
+  By default, the git branch, remote, and tag commands give you lists of things, but no information about them. Here are some aliases that do a little better.
+
+[alias]
+  b = branch -v
+  r = remote -v
+  t = tag -l
+
+  There are many other aliases given in the .gitconfig included in the Appendix, but these two are aliases for otherwise hard to remember commands.
+
+[alias]
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
+
+  

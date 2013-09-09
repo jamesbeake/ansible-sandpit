@@ -1,6 +1,6 @@
 ---
 # file: drushtest.yml
-- hosts: local
+- hosts: '{{hosts}}'
   user: james
   sudo: yes
 

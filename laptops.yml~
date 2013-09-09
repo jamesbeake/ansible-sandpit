@@ -1,6 +1,6 @@
 ---
 # file: Laptops.yml
-- hosts: "{{hosts}}"
+- hosts: {{hosts}}
 #  user: james
   roles:
     - role: DevLaptop

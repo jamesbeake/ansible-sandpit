@@ -1,0 +1,14 @@
+
+## Git  
+#- name: Configure Git
+# template gitconfig.rc stuff
+
+# remote config stuff
+#git remote add origin git@github.com:[username]/[repo-name].git
+
+# list remotes
+# git remote -v
+
+# populate remote
+# git push origin master
+

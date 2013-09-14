@@ -6,6 +6,6 @@
     - role: DevLaptop
     - role: awsManager
     - role: juju
-#    - role: nodejs
+    - role: nodejs
 #    - role: minecraft #when: {{ ansible_hostname }}="carl"
 #    - role: sublimetext #when: {{ ansible_userspace_bits }}="64"

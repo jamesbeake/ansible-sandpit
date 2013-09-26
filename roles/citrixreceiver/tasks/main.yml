@@ -4,7 +4,7 @@
 - name: 
   apt: pkg={{ item }} state=present
   with_items:
-  - libmotif4
+  - libmotif4:i386
   - nspluginwrapper
   tags: ICA
 
@@ -15,6 +15,13 @@
   command: gdebi -/tmp/icaclient-12.1.0_amd64.deb
   tags: ICA
 
+- name: Copy patched post install script
+  copy: src=icaclient.postinst dest=/var/lib/dpkg/info/icaclient.postinst
+
+- name: Reconfigure ICAClient
+  command: dpkg --configure icaclient
+
 - name: Use Mozilla Certificates
   file: src=/usr/share/ca-certificates/mozilla/* dest=/opt/Citrix/ICAClient/keystore/cacerts/ state=link
   tags: ICA
+

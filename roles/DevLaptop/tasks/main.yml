@@ -9,11 +9,11 @@
   apt: pkg=aptitude state=present
   tags: ubuntu
  
-- name: perform upgrade
-  apt: upgrade=safe
-  #when: ansible_hostname == "milhouse"
-  sudo: yes
-  tags: ubuntu
+#- name: perform upgrade
+#  apt: upgrade=safe
+#  #when: ansible_hostname == "milhouse"
+#  sudo: yes
+#  tags: ubuntu
 
 # sudo apt-get install  (Dell mini)
 - name: Broadcom wireless firmware for Dell Mini
@@ -23,7 +23,7 @@
   when: ansible_hostname == "milhouse"
 
 - name: Point Documents to Dropbox
-  file: dest=/home/james/Documents src=/home/james/Dropbox/Home\ Files/james owner=james group=james state=link
+  file: dest=/home/james/Documents src="/home/james/Dropbox/Home Files/james" owner=james group=james state=link
   
 #- name: Backup gpg keys
 #  command: "rsync -r /home/james/.gnupg /media/D7EC-A43D/JAMES-FILES/"
@@ -32,5 +32,7 @@
   apt: pkg={{item}} state=present
   with_items:
   - git
- 
 
+- name: Softlink var/www
+  file: src=/home/james/Dropbox/workspace/Projects/php dest=/var/www/php state=link
+  

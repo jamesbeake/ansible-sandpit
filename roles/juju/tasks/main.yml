@@ -10,9 +10,11 @@
 - name: Install JuJu local enviroment components
   apt: pkg={{item}} update_cache=yes state=present
   with_items:
-  - lxc
-  - mongodb-server
-  - juju
+  - juju-core
+  - juju-local
+#  - lxc
+#  - mongodb-server
+#  - juju
   
   
   #ssh-keygen -t rsa -b 2048

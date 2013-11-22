@@ -21,7 +21,6 @@
   - yo
   - grunt-cli
   - bower
-  - mongojs
   tags: npm
 
 #sudo add-apt-repository ppa:chris-lea/node.js  

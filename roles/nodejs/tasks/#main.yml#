@@ -8,21 +8,12 @@
   apt: update_cache=yes
   tags: nodejs
 
-- name: Install Node 
+- name: 
   apt: pkg={{ item }} state=present
   with_items:
   - nodejs
   tags: nodejs
 
-# sudo npm install -g yo grunt-cli bower
-- name: NPM install Yoman, Grunt and Bower
-  npm: name={{ item }} state=present global=yes
-  with_items:
-  - yo
-  - grunt-cli
-  - bower
-  - mongojs
-  tags: npm
 
 #sudo add-apt-repository ppa:chris-lea/node.js  
 #sudo apt-get update  

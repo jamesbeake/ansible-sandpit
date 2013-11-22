@@ -2,40 +2,52 @@
 # file: drupal/tasks/main.yml
 
 - name: Download DRUPAL using Drush.
-  command: drush dl drupal --destination=/var/www --drupal-project-rename={{ sitename }} -y creates=/var/www/{{ sitename }}
+  command: drush dl {{drupal_distro}} --destination=/var/www --drupal-project-rename={{ sitedomain }} -y creates=/var/www/{{ sitedomain }}
   tags: drupal
 
-- name: Fix permissions on Drupal site directory
-  file: path=/var/www/{{ sitename }} owner=james group=www-data state=directory recurse=yes
+- name: Fix Owners on Drupal site directory
+  file: path=/var/www/{{ sitedomain}} owner=james group=www-data mode=0775 state=directory recurse=yes
 
 - name: Set correct permissions on FILES folder
-  file: path=/var/www/{{ sitename }}/sites/default/files 
+  file: path=/var/www/{{ sitedomain}}/sites/default/files 
            owner=james group=www-data mode=0775 state=directory
   tags: drupal
 
 - name: Copy default Settings.php file if Settings.PHP file does not exist
   command: cp default.settings.php settings.php 
-           chdir=/var/www/{{ sitename }}/sites/default
-           creates=/var/www/{{ sitename }}/sites/default/settings.php
+           chdir=/var/www/{{ sitedomain}}/sites/default
+           creates=/var/www/{{ sitedomain }}/sites/default/settings.php
   register: settingsfile
 
 - name: Allow read/write to settings.php
-  file: path=/var/www/{{ sitename }}/sites/default/settings.php owner=james group=www-data mode=660
+  file: path=/var/www/{{ sitedomain}}/sites/default/settings.php owner=james group=www-data mode=660
   tags: drupal
 
 ## drush si --db-url=mysql://testing:testing@localhost/testing
 ## https://drupal.org/node/1606348
 
-- name: Run DRUSH Site-Install command
-  command: drush si --db-url=mysql://{{sitename}}:{{sitename}}@localhost/{{sitename}} --site-name="{{sitename}} Pwd={{sitepass}}" --account-name=admin --account-pass={{ sitepass }} --clean-url=0 --yes -r /var/www/{{sitename}} 
+- name: Run DRUSH Site-Install command (broken on D6)
+  command: drush si --db-url=mysql://{{siteusername}}:{{sitename}}@localhost/{{sitename}} --site-name="{{sitedomain}} Pwd={{sitepass}}" --account-name=admin --account-pass={{ sitepass }} --clean-url=0 --yes --root=/var/www/{{sitedomain}} 
   register: si-result
   tags: drupal
 
-#- name: Show Admin random password assigned by site-install command
-#  debug: msg=" Run $(si-result.stdout) result"su
-#  tags: drupal
-
+- name: Create apache virtual host file for site
+  template: src=site_template.j2 dest=/etc/apache2/sites-available/{{sitedomain}}
+  tags: drupal
   
-#- name: Cleanup Site install - not needed, done by drush si
-#  file: path=/var/www/{{ sitename }}/sites/default/settings.php mode=440
-#  tags: drupal
+- name: e2enable apache
+  command: a2ensite {{sitedomain}}
+  notify: restart apache2
+  tags: 
+  - drupal
+  - apache
+
+- name: a2enmod apache
+  command: a2enmod {{ item }}
+  with_items:
+  - rewrite
+  notify: restart apache2
+  tags: 
+  - drupal
+  - apache
+

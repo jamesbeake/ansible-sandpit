@@ -1,5 +1,5 @@
 ---
-# file: drushtest.yml
+# file: drupalsite.yml
 - hosts: '{{hosts}}'
   user: james
   sudo: yes
@@ -7,17 +7,28 @@
 
   vars_prompt:
     - name: "sitename"
-      prompt: "Enter Site name"
+      prompt: "Enter Site name Default: mydrupal"
       private: no
       default: "mydrupal"
+
+    - name: "drupal_distro"
+      prompt: "Enter the drupal distro Default: drupal"
+      private: no
+      default: "drupal"
 
     - name: "sitepass"
       prompt: "Enter the admin password for the new site"
       private: yes
 
+    - name: "siteusername"
+      prompt: "Enter the Database User Name Default: drupal"
+      default: "drupal"
+
+  vars:
+    sitedomain: "{{sitename}}.local"
+    
   roles:
     - role: webtier
     - role: database
     - role: drush
     - role: drupal
-

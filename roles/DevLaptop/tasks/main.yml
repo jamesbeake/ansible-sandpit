@@ -33,6 +33,6 @@
   with_items:
   - git
 
-- name: Softlink var/www
-  file: src=/home/james/Dropbox/workspace/Projects/php dest=/var/www/php state=link
-  
+#- name: Softlink var/www/php to dropbox
+#  file: dest=/var/www/php src=/home/james/Dropbox/workspace/Projects/php state=link
+

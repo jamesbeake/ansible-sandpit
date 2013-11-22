@@ -16,7 +16,7 @@
 - name: Download Ansible from git
   git: repo=https://github.com/ansible/ansible.git
        dest=/home/james/opt/ansible
-       version=v1.3
+       version=release1.4.0
   #sudo_user: james
   tags: ansible
   

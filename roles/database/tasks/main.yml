@@ -19,4 +19,4 @@
   mysql_db: name={{ sitename }} state=present
 
 - name: Create Application DB User
-  mysql_user: name={{ sitename }} password={{ sitename }} priv={{ sitename }}.*:ALL host='localhost' state=present
+  mysql_user: name={{ siteusername }} password={{ siteusername }} priv={{ sitename }}.*:ALL host='localhost' state=present

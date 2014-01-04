@@ -27,7 +27,7 @@
 ## https://drupal.org/node/1606348
 
 - name: Run DRUSH Site-Install command (broken on D6)
-  command: drush si --db-url=mysql://{{siteusername}}:{{sitename}}@localhost/{{sitename}} --site-name="{{sitedomain}} Pwd={{sitepass}}" --account-name=admin --account-pass={{ sitepass }} --clean-url=0 --yes --root=/var/www/{{sitedomain}} 
+  command: drush si --db-url=mysql://{{siteusername}}:{{siteusername}}@localhost/{{sitename}} --site-name="{{sitedomain}} Pwd={{sitepass}}" --account-name=admin --account-pass={{ sitepass }} --clean-url=0 --yes --root=/var/www/{{sitedomain}} 
   register: si-result
   tags: drupal
 

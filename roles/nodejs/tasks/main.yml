@@ -24,6 +24,7 @@
   - mongojs
   tags: npm
 
-#sudo add-apt-repository ppa:chris-lea/node.js  
-#sudo apt-get update  
-#sudo apt-get install nodejs
+# sudo npm install -g DOCPAD version 6.59
+- name: NPM install DOCPAD v6.59
+  npm: name=docpad version=6.59 state=present global=yes
+  tags: npm

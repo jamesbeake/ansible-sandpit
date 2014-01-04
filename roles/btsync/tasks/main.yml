@@ -1,0 +1,18 @@
+---
+# file: btysnc/tasks/main.yml
+
+- name: Add btsync PPA
+  apt_repository: repo='ppa:tuxpoldo/btsync'
+  tags: btsync
+
+- name: update repository cache
+  apt: update_cache=yes
+  tags: btsync
+
+- name: Install btsync 
+  apt: pkg={{ item }} state=present
+  with_items:
+  - btsync-user
+  tags: btsync
+
+

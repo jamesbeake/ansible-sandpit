@@ -1,11 +1,13 @@
 ---
 # file: Laptops.yml
 - hosts: "{{hosts}}"
-#  user: james
+# remote_user: root **default
+  sudo: yes
   roles:
     - role: DevLaptop
     - role: awsManager
     - role: ipython
+    - role: btsync
 #    - role: juju
     - role: nodejs
 #    - role: minecraft #when: {{ ansible_hostname }}="carl"

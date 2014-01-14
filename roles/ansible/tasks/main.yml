@@ -3,7 +3,7 @@
 
 
 - name: install requiried packages (*buntu)
-  apt: pkg={{ item }} state=installed
+  apt: pkg={{item}} state=present
   with_items:
   - git
   - aptitude
@@ -16,12 +16,12 @@
 - name: Download Ansible from git
   git: repo=https://github.com/ansible/ansible.git
        dest=/home/james/opt/ansible
-       version=release1.4.0
+       version=v1.4.4
   #sudo_user: james
   tags: ansible
   
 - name: fix permissions on opt/ansible
-  file: path=/home/james/opt/ansible owner=james group=james state=directory recurse=yes
+  file: path=/home/james/opt/ansible owner=james group=james recurse=yes
 
 - name: Copy over my Ansible .bash_alias backing up original
   copy: src=myAnsible.bash_alias dest=/home/james/.bash_aliases backup=yes

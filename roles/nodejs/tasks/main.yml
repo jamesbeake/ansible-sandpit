@@ -15,7 +15,7 @@
   tags: nodejs
 
 # sudo npm install -g yo grunt-cli bower
-- name: NPM install Yoman, Grunt and Bower
+- name: NPM install Yoman, Grunt, Bower and Mongojs
   npm: name={{ item }} state=present global=yes
   with_items:
   - yo
